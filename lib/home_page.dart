@@ -11,22 +11,24 @@ class HomePage extends StatelessWidget {
         title: const Text("SmartGestion Home"),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('logo/logo.png'), // Path to your background image
-            fit: BoxFit.cover, // Ensure the image covers the entire screen
+            image: AssetImage('logo/logo.png'),
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               // Company Logo and Name
-              Container(
+              Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30),
                 child: Column(
                   children: [
                     Center(
-                      child: Image.asset('logo/commerX.png', height: 150), // Logo image
+                      child: Image.asset('logo/commerX.png', height: 150),
                     ),
                     const SizedBox(height: 10),
                     const Text(
@@ -42,24 +44,35 @@ class HomePage extends StatelessWidget {
               ),
 
               // Scrollable options - Cards with icons and titles
-              Container(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: GridView.count(
-                  crossAxisCount: 2, // Two options per row
-                  crossAxisSpacing: 20, // Space between columns
-                  mainAxisSpacing: 20, // Space between rows
-                  shrinkWrap: true, // Makes GridView fit to the content
-                  physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
-                  childAspectRatio: 1.5, // Adjust button size ratio
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  childAspectRatio: 1.2, // Ajusté pour éviter le débordement
                   children: [
-                    _buildOptionCard(context, 'Go to Login', '/login', Icons.login),
-                    _buildOptionCard(context, 'Go to Stock Management', '/stock', Icons.store),
-                    _buildOptionCard(context, 'Go to Invoices', '/invoices', Icons.account_balance_wallet),
-                    _buildOptionCard(context, 'Go to Quotes', '/quotes', Icons.note_add),
-                    _buildOptionCard(context, 'Go to Delivery Notes', '/delivery', Icons.delivery_dining),
+                    _buildOptionCard(context, 'Stock Management', '/stock', Icons.store),
+                    _buildOptionCard(context, 'Invoices', '/invoices', Icons.account_balance_wallet),
+                    _buildOptionCard(context, 'Quotes', '/quotes', Icons.note_add),
+                    _buildOptionCard(context, 'Delivery Notes', '/delivery', Icons.delivery_dining),
                   ],
                 ),
               ),
+
+              const SizedBox(height: 30),
+              const Text(
+                '© 2023 SmartGestion. All rights reserved.',
+                style: TextStyle(fontSize: 14, color: Colors.white70),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Developed by zakaria mounji',
+                style: TextStyle(fontSize: 14, color: Colors.white70),
+              ),
+              const SizedBox(height: 30),
             ],
           ),
         ),
@@ -67,39 +80,29 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Method to build each option card with an icon and title for better UX
   Widget _buildOptionCard(BuildContext context, String text, String route, IconData icon) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, route);
-      },
+      onTap: () => Navigator.pushNamed(context, route),
       child: Card(
-        elevation: 8, // Adds elevation to make the card appear raised from the screen
+        elevation: 8,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15), // Rounded corners
+          borderRadius: BorderRadius.circular(15),
         ),
-        color: Colors.white.withOpacity(0.8), // Semi-transparent white background
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // Icon Section
-            Icon(
-              icon,
-              size: 40,
-              color: Colors.deepPurple,
-            ),
-            // Space between icon and title
-            const SizedBox(height: 10),
-            // Title Section
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
+        color: Colors.white.withOpacity(0.8),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 40, color: Colors.deepPurple),
+              const SizedBox(height: 10),
+              Text(
                 text,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
