@@ -132,35 +132,53 @@ class _StockPageState extends State<StockPage> {
 
             // Product list
             Expanded(
-              child: _filteredProducts.isEmpty
-                  ? const Center(child: Text('No products found.'))
-                  : ListView.builder(
-                      itemCount: _filteredProducts.length,
-                      itemBuilder: (context, index) {
-                        final product = _filteredProducts[index];
-                        return Card(
-                          elevation: 4,
-                          margin: const EdgeInsets.symmetric(vertical: 8),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('productx')
+                    .orderBy('createdAt', descending: true)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return const Center(child: Text('No products found.'));
+                  }
+
+                  final products = snapshot.data!.docs;
+
+                  return ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      final data = product.data() as Map<String, dynamic>;
+
+                      return Card(
+                        elevation: 4,
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: ListTile(
+                          leading: const Icon(Icons.inventory, color: Colors.deepPurple),
+                          title: Text(data['name'] ?? ''),
+                          subtitle: Text('Stock: ${data['stock']} pcs\nPrice: \$${data['price']}'),
+                          isThreeLine: true,
+                          trailing: IconButton(
+                            icon: const Icon(Icons.edit, color: Colors.grey),
+                            onPressed: () {
+                              // TODO: Edit logic
+                            },
                           ),
-                          child: ListTile(
-                            leading: const Icon(Icons.inventory, color: Colors.deepPurple),
-                            title: Text(product['name']),
-                            subtitle: Text(
-                                'Stock: ${product['stock']} pcs\nPrice: \$${product['price']}'),
-                            isThreeLine: true,
-                            trailing: IconButton(
-                              icon: const Icon(Icons.edit, color: Colors.grey),
-                              onPressed: () {
-                                // TODO: Add edit feature
-                              },
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
+
           ],
         ),
       ),
