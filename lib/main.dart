@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'StockPage.dart';
+import 'authentification.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -11,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'SmartGestion',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -18,7 +24,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
+        '/': (context) => const AuthenticationPage(),
+        '/home': (context) => const HomePage(),
         '/login': (context) => const LoginPage(),
         '/stock': (context) => const StockPage(),
         '/invoices': (context) => const InvoicesPage(),
@@ -28,7 +35,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -46,28 +52,12 @@ class LoginPage extends StatelessWidget {
             const Text("Login Screen"),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/home');
               },
-              child: const Text('Back to Home'),
+              child: const Text('Go to Home'),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class StockPage extends StatelessWidget {
-  const StockPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Stock Management"),
-      ),
-      body: Center(
-        child: const Text("Stock Page Content Goes Here"),
       ),
     );
   }

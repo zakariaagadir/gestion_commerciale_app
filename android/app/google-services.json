@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "421623967827",
+    "project_id": "commerx2",
+    "storage_bucket": "commerx2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421623967827:android:b4011dff0b27288ca796a6",
+        "android_client_info": {
+          "package_name": "com.example.ap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXVIRuBRd-bdshZBvzKgaGjHM1vlK5bc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421623967827:android:0e0d98bd02ee68eda796a6",
+        "android_client_info": {
+          "package_name": "com.zakaria.ap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXVIRuBRd-bdshZBvzKgaGjHM1vlK5bc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
