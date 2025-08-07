@@ -12,6 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  pdf: ^3.10.8
+  printing: ^5.11.0
   cupertino_icons: ^1.0.8
   firebase_core: ^3.13.0  # Upgraded
   firebase_auth: ^5.5.2 # Upgraded

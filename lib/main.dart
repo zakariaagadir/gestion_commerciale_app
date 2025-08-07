@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'addcommercial.dart';
+import 'SellsPage.dart';
 import 'StockPage.dart';
+import 'QuotesPage.dart';
 import 'authentification.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -30,7 +33,8 @@ class MyApp extends StatelessWidget {
         '/stock': (context) => const StockPage(),
         '/invoices': (context) => const InvoicesPage(),
         '/quotes': (context) => const QuotesPage(),
-        '/delivery': (context) => const DeliveryPage(),
+        '/Sells': (context) => const SellsPage(),
+        '/AddCommercial': (context) => const AddCommercial(),
       },
     );
   }
@@ -42,9 +46,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login Page"),
-      ),
+      appBar: AppBar(title: const Text("Login Page")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -69,44 +71,10 @@ class InvoicesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Invoices Page"),
-      ),
-      body: Center(
-        child: const Text("Invoices Page Content Goes Here"),
-      ),
+      appBar: AppBar(title: const Text("Invoices Page")),
+      body: Center(child: const Text("Invoices Page Content Goes Here")),
     );
   }
 }
 
-class QuotesPage extends StatelessWidget {
-  const QuotesPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Quotes Page"),
-      ),
-      body: Center(
-        child: const Text("Quotes Page Content Goes Here"),
-      ),
-    );
-  }
-}
-
-class DeliveryPage extends StatelessWidget {
-  const DeliveryPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Delivery Notes Page"),
-      ),
-      body: Center(
-        child: const Text("Delivery Notes Page Content Goes Here"),
-      ),
-    );
-  }
-}
